@@ -7,7 +7,7 @@
   "author": "Junle Li <lijunle@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "watch": "tsc --noEmit --watch",
+    "build": "tsc",
     "lint": "tslint --project tsconfig.json --exclude ApplicationInsights-node.js/**/*",
     "test": "webpack"
   },
