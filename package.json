@@ -1,0 +1,12 @@
+{
+  "name": "applicationinsights-expo",
+  "description": "Leverage Azure Application Insights in Expo.",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://github.com/lijunle/ApplicationInsights-Expo.git",
+  "author": "Junle Li <lijunle@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo TODO"
+  }
+}
