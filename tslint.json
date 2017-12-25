@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "tslint:all"
+  ],
+  "rules": {
+    "strict-type-predicates": false,
+    "no-require-imports": false
+  }
+}
