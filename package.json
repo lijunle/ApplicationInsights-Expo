@@ -1,0 +1,25 @@
+{
+  "name": "applicationinsights-expo",
+  "description": "Leverage Azure Application Insights in Expo.",
+  "version": "0.0.1",
+  "main": "lib/ApplicationInsights-Expo/index.js",
+  "types": "lib/ApplicationInsights-Expo/index.d.ts",
+  "repository": "https://github.com/lijunle/ApplicationInsights-Expo.git",
+  "author": "Junle Li <lijunle@gmail.com>",
+  "license": "MIT",
+  "files": [
+    "lib/"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "lint": "tslint --project tsconfig.json --exclude ApplicationInsights-node.js/**/*",
+    "test": "webpack"
+  },
+  "devDependencies": {
+    "@types/node": "^8.5.2",
+    "ts-loader": "^3.2.0",
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.2",
+    "webpack": "^3.10.0"
+  }
+}
