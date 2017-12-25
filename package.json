@@ -7,6 +7,10 @@
   "author": "Junle Li <lijunle@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "echo TODO"
+    "watch": "tsc --noEmit --watch"
+  },
+  "devDependencies": {
+    "@types/node": "^8.5.2",
+    "typescript": "^2.6.2"
   }
 }
