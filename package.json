@@ -7,6 +7,9 @@
   "repository": "https://github.com/lijunle/ApplicationInsights-Expo.git",
   "author": "Junle Li <lijunle@gmail.com>",
   "license": "MIT",
+  "files": [
+    "lib/"
+  ],
   "scripts": {
     "build": "tsc",
     "lint": "tslint --project tsconfig.json --exclude ApplicationInsights-node.js/**/*",
