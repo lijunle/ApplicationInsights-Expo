@@ -1,0 +1,4 @@
+[submodule "ApplicationInsights-node.js"]
+	path = ApplicationInsights-node.js
+	url = https://github.com/Microsoft/ApplicationInsights-node.js.git
+	branch = master
