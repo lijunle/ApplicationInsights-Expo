@@ -23,6 +23,15 @@ export class TelemetryClient {
   private telemetryProcessors: TelemetryProcessor[] = [];
 
   /**
+   * Constructs a new client of the client.
+   * @param instrumentationKey The instrumentation key to use. It will read from environment variable if not specified.
+   */
+  public constructor(instrumentationKey?: string) {
+    this.config = new Config();
+    this.commonProperties = {};
+  }
+
+  /**
    * Adds telemetry processor to the collection. Telemetry processors will be called one by one before telemetry item is
    * pushed for sending and in the order they were added.
    * @param telemetryProcessor A function takes Envelope, and optional context object and returns boolean.
