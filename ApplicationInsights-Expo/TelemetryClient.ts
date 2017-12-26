@@ -1,5 +1,6 @@
 import { Config } from "./Config";
 import { Context, Contracts, FlushOptions } from "./ports";
+import * as Util from "./Util";
 
 // tslint:disable-next-line:no-any
 export type TelemetryProcessor = (envelope: Contracts.Envelope, contextObjects?: { [name: string]: any }) => boolean;
@@ -65,14 +66,10 @@ export class TelemetryClient {
    * @param telemetry Object encapsulating tracking option.
    */
   public trackDependency(telemetry: Contracts.DependencyTelemetry): void {
-    /* @todo FIXME
     if (telemetry && !telemetry.target && telemetry.data) {
-        // Url.parse().host returns null for non-urls,
-        // Making this essentially a no-op in those cases
-        // If this logic is moved, update jsdoc in DependencyTelemetry.target
-        telemetry.target = url.parse(telemetry.data).host;
+      telemetry.target = Util.getHostname(telemetry.data);
     }
-    */
+
     this.track(telemetry, Contracts.TelemetryType.Dependency);
   }
 
