@@ -1,7 +1,5 @@
-import Contracts = require("../ApplicationInsights-node.js/Declarations/Contracts");
-import Context = require("../ApplicationInsights-node.js/Library/Context");
-import FlushOptions = require("../ApplicationInsights-node.js/Library/FlushOptions");
 import { Config } from "./Config";
+import { Context, Contracts, FlushOptions } from "./ports";
 
 // tslint:disable-next-line:no-any
 export type TelemetryProcessor = (envelope: Contracts.Envelope, contextObjects?: { [name: string]: any }) => boolean;
