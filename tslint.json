@@ -3,6 +3,7 @@
     "tslint:all"
   ],
   "rules": {
+    "no-inferrable-types": false,
     "strict-type-predicates": false
   }
 }
