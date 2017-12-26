@@ -11,13 +11,13 @@ export type TelemetryProcessor = (envelope: Contracts.Envelope, contextObjects?:
  */
 export class TelemetryClient {
   /** Custom properties to be included with all events. */
-  public commonProperties: { [key: string]: string };
+  public readonly commonProperties: { [key: string]: string };
 
   /** Config for advanced scenarios. */
-  public config: Config;
+  public readonly config: Config;
 
   /** The context for TelemetryClient. */
-  public context: Context;
+  public readonly context: Context;
 
   /** The telemetry processors. */
   private telemetryProcessors: TelemetryProcessor[] = [];
