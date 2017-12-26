@@ -1,7 +1,6 @@
-import Contracts = require("../ApplicationInsights-node.js/Declarations/Contracts");
-import Context = require("../ApplicationInsights-node.js/Library/Context");
-import FlushOptions = require("../ApplicationInsights-node.js/Library/FlushOptions");
 import { Config } from "./Config";
+import { Context, Contracts, FlushOptions } from "./ports";
+import * as Util from "./Util";
 
 // tslint:disable-next-line:no-any
 export type TelemetryProcessor = (envelope: Contracts.Envelope, contextObjects?: { [name: string]: any }) => boolean;
@@ -12,16 +11,25 @@ export type TelemetryProcessor = (envelope: Contracts.Envelope, contextObjects?:
  */
 export class TelemetryClient {
   /** Custom properties to be included with all events. */
-  public commonProperties: { [key: string]: string };
+  public readonly commonProperties: { [key: string]: string };
 
   /** Config for advanced scenarios. */
-  public config: Config;
+  public readonly config: Config;
 
   /** The context for TelemetryClient. */
-  public context: Context;
+  public readonly context: Context;
 
   /** The telemetry processors. */
   private telemetryProcessors: TelemetryProcessor[] = [];
+
+  /**
+   * Constructs a new client of the client.
+   * @param instrumentationKey The instrumentation key to use. It will read from environment variable if not specified.
+   */
+  public constructor(instrumentationKey?: string) {
+    this.config = new Config();
+    this.commonProperties = {};
+  }
 
   /**
    * Adds telemetry processor to the collection. Telemetry processors will be called one by one before telemetry item is
@@ -67,14 +75,10 @@ export class TelemetryClient {
    * @param telemetry Object encapsulating tracking option.
    */
   public trackDependency(telemetry: Contracts.DependencyTelemetry): void {
-    /* @todo FIXME
     if (telemetry && !telemetry.target && telemetry.data) {
-        // Url.parse().host returns null for non-urls,
-        // Making this essentially a no-op in those cases
-        // If this logic is moved, update jsdoc in DependencyTelemetry.target
-        telemetry.target = url.parse(telemetry.data).host;
+      telemetry.target = Util.getHostname(telemetry.data);
     }
-    */
+
     this.track(telemetry, Contracts.TelemetryType.Dependency);
   }
 
@@ -91,11 +95,10 @@ export class TelemetryClient {
    * @param telemetry Object encapsulating tracking options.
    */
   public trackException(telemetry: Contracts.ExceptionTelemetry): void {
-    /* @todo FIXME
     if (telemetry && telemetry.exception && !Util.isError(telemetry.exception)) {
-        telemetry.exception = new Error(telemetry.exception.toString());
+      telemetry.exception = new Error(telemetry.exception.toString());
     }
-    */
+
     this.track(telemetry, Contracts.TelemetryType.Exception);
   }
 
