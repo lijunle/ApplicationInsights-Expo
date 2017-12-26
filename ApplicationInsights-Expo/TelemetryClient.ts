@@ -1,6 +1,6 @@
 import { Channel } from "./Channel";
 import { Config } from "./Config";
-import { Context, Contracts, FlushOptions } from "./ports";
+import { Context, Contracts, FlushOptions, Logging } from "./ports";
 import * as Util from "./Util";
 
 // tslint:disable-next-line:no-any
@@ -66,7 +66,32 @@ export class TelemetryClient {
    */
   // tslint:disable-next-line:prefer-function-over-method
   public track(telemetry: Contracts.Telemetry, telemetryType: Contracts.TelemetryType): void {
-    // @todo FIXME
+    if (telemetry && Contracts.telemetryTypeToBaseType(telemetryType)) {
+      /* @todo FIXME
+      const envelope: Contracts.Envelope = EnvelopeFactory.createEnvelope(
+        telemetry, telemetryType, this.commonProperties, this.context, this.config);
+
+      // Set time on the envelope if it was set on the telemetry item
+      if (telemetry.time) {
+        envelope.time = telemetry.time.toISOString();
+      }
+
+      let accepted = this.runTelemetryProcessors(envelope, telemetry.contextObjects);
+
+      // Ideally we would have a central place for "internal" telemetry processors and users can configure which ones
+      // are in use. This will do for now. Otherwise clearTelemetryProcessors() would be problematic.
+      accepted = accepted && TelemetryProcessors.samplingTelemetryProcessor(
+        envelope,
+        { correlationContext: CorrelationContextManager.getCurrentContext() }
+      );
+
+      if (accepted) {
+        this.channel.send(envelope);
+      }
+      */
+    } else {
+      Logging.warn("track() requires telemetry object and telemetryType to be specified.");
+    }
   }
 
   /**
