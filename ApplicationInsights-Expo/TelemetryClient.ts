@@ -1,3 +1,4 @@
+import { Channel } from "./Channel";
 import { Config } from "./Config";
 import { Context, Contracts, FlushOptions } from "./ports";
 import * as Util from "./Util";
@@ -19,6 +20,8 @@ export class TelemetryClient {
   /** The context for TelemetryClient. */
   public readonly context: Context;
 
+  private readonly channel: Channel;
+
   /** The telemetry processors. */
   private telemetryProcessors: TelemetryProcessor[] = [];
 
@@ -29,6 +32,7 @@ export class TelemetryClient {
   public constructor(instrumentationKey?: string) {
     this.config = new Config();
     this.commonProperties = {};
+    this.channel = new Channel(this.config);
   }
 
   /**
@@ -51,12 +55,8 @@ export class TelemetryClient {
    * Immediately send all queued telemetry.
    * @param options Flush options, including indicator whether app is crashing and callback
    */
-  public flush(options?: FlushOptions): void { // tslint:disable-line:prefer-function-over-method
-    /* @todo FIXME
-    this.channel.triggerSend(
-        options ? !!options.isAppCrashing : false,
-        options ? options.callback : undefined);
-    */
+  public flush(options?: FlushOptions): void {
+    this.channel.flush(options || { isAppCrashing: false, callback: undefined });
   }
 
   /**
