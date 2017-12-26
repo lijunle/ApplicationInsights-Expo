@@ -10,3 +10,7 @@ export function getHostname(url: string): undefined | string {
     return hostname;
   }
 }
+
+export function isError(error: any): boolean { // tslint:disable-line:no-any
+  return error instanceof Error;
+}

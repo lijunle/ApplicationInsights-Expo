@@ -86,11 +86,10 @@ export class TelemetryClient {
    * @param telemetry Object encapsulating tracking options.
    */
   public trackException(telemetry: Contracts.ExceptionTelemetry): void {
-    /* @todo FIXME
     if (telemetry && telemetry.exception && !Util.isError(telemetry.exception)) {
-        telemetry.exception = new Error(telemetry.exception.toString());
+      telemetry.exception = new Error(telemetry.exception.toString());
     }
-    */
+
     this.track(telemetry, Contracts.TelemetryType.Exception);
   }
 
